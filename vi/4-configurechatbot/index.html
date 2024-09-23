@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.3">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Cấu Hình Chat Bot :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1727114062" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1727114062" rel="stylesheet">
+    <link href="/css/hybrid.css?1727114062" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1727114062" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1727114062" rel="stylesheet">
+    <link href="/css/auto-complete.css?1727114062" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1727114062" rel="stylesheet">
+    <link href="/css/theme.css?1727114062" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1727114062" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1727114062" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1727114062"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/4-configurechatbot/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1727114062"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1727114062"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/vund202.github.io\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1727114062"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/">
+           <b> 1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/" title="Chuẩn Bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/">
+          <b> 2. </b>Chuẩn Bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-createchatbot/" title="Tạo Chat Bot" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/3-createchatbot/">
+          <b> 3. </b>Tạo Chat Bot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-configurechatbot/" title="Cấu Hình Chat Bot" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/vi/4-configurechatbot/">
+          <b> 4. </b>Cấu Hình Chat Bot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-addfeatureforchatbot/" title="Xử Lý Đầu Vào Không Chính Xác cho Chatbot của Bạn" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-addfeatureforchatbot/">
+          <b> 5. </b>Xử Lý Đầu Vào Không Chính Xác cho Chatbot của Bạn
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-addmoreanswer/" title="Thêm Các Tùy Chọn Câu Trả Lời Cho Chatbot của Bạn" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-addmoreanswer/">
+          <b> 6. </b>Thêm Các Tùy Chọn Câu Trả Lời Cho Chatbot của Bạn
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-cleaning/" title="Dọn Dẹp Bot" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-cleaning/">
+          <b> 7. </b>Dọn Dẹp Bot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="http://vund202.github.io/4-configurechatbot/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="http://vund202.github.io/vi/4-configurechatbot/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>24-09-2024</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/sutrinh/"  style="color:orange">Nguyên Vũ  </a> <br>
+
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Quản Lý Phiên</a> > Cấu Hình Chat Bot
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#-hướng-dẫn-từng-bước-để-cấu-hình-chat-bot-của-bạn">📖 Hướng Dẫn Từng Bước để Cấu Hình Chat Bot của Bạn</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Cấu Hình Chat Bot
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="-hướng-dẫn-từng-bước-để-cấu-hình-chat-bot-của-bạn">📖 Hướng Dẫn Từng Bước để Cấu Hình Chat Bot của Bạn</h2>
+<ol>
+<li>
+<p><strong>Chọn Phương Pháp Tạo</strong><br>
+Chọn phương pháp <strong>Truyền thống</strong> và tạo một bot trống.<br>
+<img alt="Phương Pháp Tạo" src="/images/4.jpg"></p>
+</li>
+<li>
+<p><strong>Chọn Tên cho Bot</strong><br>
+Trong workshop này, chúng ta sẽ tạo một bot để nhận đơn đặt đồ uống. Chọn một tên và mô tả phù hợp với mục đích này.<br>
+<img alt="Tên cho Bot" src="/images/5.jpg"></p>
+</li>
+<li>
+<p><strong>Cài Đặt Quyền IAM</strong><br>
+Chọn <strong>&ldquo;Tạo một vai trò với quyền hạn cơ bản của Amazon Lex&rdquo;</strong> để cấp quyền cần thiết.<br>
+<img alt="Quyền IAM" src="/images/6.jpg"></p>
+</li>
+<li>
+<p><strong>Đạo Luật Bảo Vệ Quyền Riêng Tư Trẻ Em Trực Tuyến (COPPA)</strong><br>
+Chọn <strong>&ldquo;Không&rdquo;</strong> khi được hỏi liệu bot của bạn có thuộc đối tượng quy định của COPPA hay không.</p>
+</li>
+<li>
+<p><strong>Thời Gian Chờ Phiên Làm Việc</strong><br>
+Giữ cài đặt mặc định cho thời gian chờ phiên làm việc trừ khi bạn có yêu cầu cụ thể. Chọn <strong>Tiếp theo</strong> để tiến đến bước tiếp theo.</p>
+</li>
+<li>
+<p><strong>Thêm Ngôn Ngữ</strong><br>
+Trong bước này, bạn sẽ chọn một ngôn ngữ cho bot và giọng nói mà bạn muốn sử dụng.<br>
+<img alt="Ngôn Ngữ" src="/images/7.jpg"><br>
+Sau đó chọn <strong>Hoàn thành</strong>.</p>
+</li>
+<li>
+<p><strong>Cấu Hình Ý Định</strong><br>
+Trong Amazon Lex, một <strong>Ý định</strong> đại diện cho một hành động hoặc nhiệm vụ cụ thể mà người dùng muốn thực hiện thông qua chatbot. Nó xác định mục tiêu của đầu vào người dùng và giúp bot hiểu những gì người dùng đang yêu cầu.</p>
+<p><strong>Các Câu Mẫu</strong>: Đây là các cụm từ mà người dùng có thể nói để kích hoạt ý định. Ví dụ, cho một ý định &ldquo;OrderDrink&rdquo;, các câu mẫu có thể bao gồm:</p>
+<ul>
+<li>&ldquo;Tôi muốn đặt một ly cà phê.&rdquo;</li>
+<li>&ldquo;Cho tôi một tách trà nhé.&rdquo;</li>
+<li>&ldquo;Tôi muốn một lon nước ngọt.&rdquo;</li>
+</ul>
+<p>Bằng cách cung cấp một loạt các câu mẫu, bạn có thể cải thiện khả năng nhận diện và phản hồi yêu cầu của người dùng một cách chính xác.</p>
+<p>7.1 <strong>Chọn Tên cho Ý Định</strong><br>
+<img alt="Tên cho Ý Định" src="/images/8.jpg"></p>
+<p>7.2 <strong>Thêm Các Câu Mẫu</strong><br>
+Thêm các câu mẫu là bước quan trọng trong việc cấu hình ý định của bạn. Những câu này huấn luyện mô hình Amazon Lex để hiểu các cách diễn đạt khác nhau mà người dùng có thể sử dụng.</p>
+<p>Khi thêm các câu mẫu:</p>
+<ul>
+<li><strong>Độ Đa Dạng</strong>: Bao gồm một loạt các cụm từ để nắm bắt nhiều cách mà người dùng có thể diễn đạt cùng một ý định. Điều này giúp bot xử lý các mẫu câu và từ vựng khác nhau.</li>
+<li><strong>Bối Cảnh</strong>: Đảm bảo rằng các câu mẫu có liên quan đến ý định. Ví dụ, cho ý định &ldquo;OrderDrink&rdquo;, hãy chắc chắn rằng các cụm từ liên quan cụ thể đến việc đặt đồ uống.</li>
+<li><strong>Độ Chính Xác</strong>: Nhiều câu mẫu hơn dẫn đến độ chính xác tốt hơn trong việc nhận diện đầu vào của người dùng, nâng cao trải nghiệm người dùng tổng thể.</li>
+</ul>
+<p><img alt="Câu Mẫu" src="/images/9.jpg"></p>
+<p>7.3 <strong>Phản Hồi Ban Đầu</strong><br>
+<img alt="Phản Hồi" src="/images/10.jpg"></p>
+<p><strong>Phản Hồi Ban Đầu</strong> là tin nhắn mà chatbot sẽ gửi lại cho người dùng sau khi nhận diện thành công ý định. Phản hồi này phục vụ nhiều mục đích:</p>
+<ul>
+<li><strong>Xác Nhận Đầu Vào của Người Dùng</strong>: Nó xác nhận với người dùng rằng yêu cầu của họ đã được hiểu.</li>
+<li><strong>Cung Cấp Thông Tin</strong>: Nó có thể bao gồm thông tin hoặc hướng dẫn liên quan đến yêu cầu của người dùng, nâng cao trải nghiệm giao tiếp.</li>
+<li><strong>Khuyến Khích Tương Tác Thêm</strong>: Phản hồi có thể thúc đẩy người dùng cung cấp thêm chi tiết hoặc thực hiện các hành động bổ sung, duy trì dòng chảy của cuộc trò chuyện.</li>
+</ul>
+<p>Ví dụ, nếu ý định là đặt một đồ uống, phản hồi ban đầu có thể là: &ldquo;Bạn muốn đặt đồ uống nào?&rdquo; Điều này khuyến khích người dùng chỉ định lựa chọn của họ, cho phép tương tác mượt mà hơn.</p>
+<p>7.4 <strong>Thêm Slots</strong><br>
+<img alt="Slot" src="/images/11.jpg"></p>
+<p><strong>Slots</strong> được sử dụng để thu thập các thông tin cụ thể từ đầu vào của người dùng mà cần thiết cho việc thực hiện ý định. Khi bạn thêm slots, bạn định nghĩa các biến sẽ giữ thông tin này. Dưới đây là một số điểm chính về slots:</p>
+<ul>
+<li>
+<p><strong>Định Nghĩa Tham Số</strong>: Slots đại diện cho các tham số mà bot cần để hoàn thành yêu cầu của người dùng. Đối với ý định &ldquo;OrderDrink&rdquo;, bạn có thể có các slots cho:</p>
+<ul>
+<li><strong>Loại Đồ Uống</strong>: Để chỉ định loại đồ uống (ví dụ: cà phê, trà).</li>
+<li><strong>Kích Thước</strong>: Để xác định kích thước của đồ uống (ví dụ: nhỏ, vừa, lớn).</li>
+</ul>
+</li>
+<li>
+<p><strong>Xác Thực Dữ Liệu</strong>: Slots cũng có thể bao gồm các quy tắc xác thực để đảm bảo rằng dữ liệu mà người dùng nhập vào đáp ứng các tiêu chí cụ thể, cải thiện độ chính xác và độ tin cậy.</p>
+</li>
+<li>
+<p><strong>Hướng Dẫn Người Dùng</strong>: Khi một slot chưa được điền, bot có thể hỏi các câu hỏi bổ sung để thu thập thông tin cần thiết. Ví dụ, nếu người dùng không chỉ định loại đồ uống, bot có thể phản hồi: &ldquo;Bạn muốn đặt loại đồ uống nào?&rdquo;</p>
+</li>
+</ul>
+<p>Việc thêm slots một cách hiệu quả cho phép bot của bạn thu thập thông tin cần thiết để xử lý yêu cầu của người dùng một cách chính xác và cung cấp trải nghiệm cá nhân hóa hơn.</p>
+<p>7.5 <strong>Xác Nhận</strong><br>
+<img alt="Xác Nhận" src="/images/12.jpg"></p>
+<p>Bước <strong>Xác Nhận</strong> là nơi bạn hoàn tất các chi tiết của ý định trước khi nó được triển khai hoàn toàn trong chatbot của bạn. Điều này bao gồm việc xem xét các thông tin bạn đã nhập và đảm bảo rằng mọi thứ được thiết lập đúng cách. Các khía cạnh chính của bước này bao gồm:</p>
+<ul>
+<li><strong>Xem Lại Cài Đặt</strong>: Bạn có thể kiểm tra tất cả các tùy chọn đã cấu hình trước đó, chẳng hạn như tên ý định, các câu mẫu, phản hồi ban đầu và slots. Đây là bước quan trọng để đảm bảo không có lỗi hoặc thông tin bị thiếu.</li>
+<li><strong>Thông Báo Xác Nhận</strong>: Thường thì, bạn sẽ thiết lập một thông báo xác nhận mà bot sẽ sử dụng để xác nhận lựa chọn của người dùng. Ví dụ, nếu người dùng đã đặt một đồ uống, bot có thể hỏi, &ldquo;Bạn có muốn xác nhận đơn đặt hàng cho cà phê không?&rdquo;</li>
+</ul>
+<p>Sau khi xem xét và thực hiện bất kỳ điều chỉnh cần thiết nào, bạn nên:</p>
+<ul>
+<li><strong>Giữ Cài Đặt Mặc Định</strong></li>
+<li>**Nhấn <strong>Lưu</strong>: Hành động này lưu tất cả các cấu hình của bạn cho ý định.</li>
+<li>**Nhấn <strong>Xây Dựng</strong>: Bước này biên dịch các thay đổi và chuẩn bị chatbot của bạn cho việc thử nghiệm và triển khai.</li>
+</ul>
+</li>
+</ol>
+<p>Bằng cách hoàn thành bước này, bạn đảm bảo rằng ý định của mình đã được cấu hình đầy đủ và sẵn sàng để phản hồi các tương tác của người dùng một cách hiệu quả.<br>
+<img alt="hoàn thành" src="/images/createbotcomplete.jpg"><br>
+Và bạn có thể thử nghiệm điều này bằng cách nhấn nút <strong>Thử</strong><br>
+<img alt="thử" src="/images/test.jpg"></p>
+<hr>
+
+<div class="notices tip" ><p>💡 <strong>Mẹo</strong>: Đảm bảo vai trò IAM của bạn có quyền chính xác trước khi tiến hành cấu hình bot.</p>
+</div>
+
+
+<div class="notices note" ><p>📝 <strong>Lưu ý</strong>: Các cài đặt mặc định cho hầu hết các cấu hình sẽ hoạt động tốt cho các thiết lập bot cơ bản.</p>
+</div>
+
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/3-createchatbot/" title="Tạo Chat Bot"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/5-addfeatureforchatbot/" title="Xử Lý Đầu Vào Không Chính Xác cho Chatbot của Bạn" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1727114062"></script>
+    <script src="/js/perfect-scrollbar.min.js?1727114062"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1727114062"></script>
+    <script src="/js/jquery.sticky.js?1727114062"></script>
+    <script src="/js/featherlight.min.js?1727114062"></script>
+    <script src="/js/highlight.pack.js?1727114062"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1727114062"></script>
+    <script src="/js/learn.js?1727114062"></script>
+    <script src="/js/hugo-learn.js?1727114062"></script>
+
+    <link href="/mermaid/mermaid.css?1727114062" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1727114062"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
